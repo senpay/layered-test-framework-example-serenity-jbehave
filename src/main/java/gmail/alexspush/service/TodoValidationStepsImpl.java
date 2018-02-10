@@ -5,6 +5,7 @@ import java.util.List;
 import gmail.alexspush.page.SelenideMainPage;
 import gmail.alexspush.test.ITodoValidationSteps;
 import net.thucydides.core.annotations.Step;
+import org.jbehave.core.annotations.Then;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -18,6 +19,7 @@ public class TodoValidationStepsImpl implements ITodoValidationSteps {
 
     @Override
     @Step
+    @Then("user sees todo item in items list: $todoName")
     public void todoItemIsPresent(String todoName) {
         final String errorMessage = String.format("Item with name %s was't found in a list", todoName);
         assertTrue(errorMessage, todoValidationLogic.isItemPresentInAList(todoName));

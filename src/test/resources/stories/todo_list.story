@@ -1,6 +1,4 @@
 Scenario: Should see total price including tax
-Given I have searched for local items containing 'wool'
-And I have selected an item
-When I add the item to the shopping cart
-Then the item should appear in the cart
-And the shipping cost should be included in the total price
+Given user opened application
+When user creates todo item with name: todoItemName
+Then user sees todo item in items list: todoItemName
