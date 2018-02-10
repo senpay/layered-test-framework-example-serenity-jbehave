@@ -13,8 +13,8 @@ public interface ITodoCompositeSteps {
 
     void userCompletedTodoItem(String todoItemName);
 
-    List<String> userCreatedNumberOfItems(int numberOfItemsCreated);
+    void userCreatedNumberOfItems(int numberOfItemsCreated);
 
-    List<String> userCompletedNumberOfItems(List<String> todoItems, int numberOfItemsCompleted);
+    void userCompletedNumberOfItems(int numberOfItemsCompleted);
 
 }

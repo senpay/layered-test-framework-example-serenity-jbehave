@@ -14,21 +14,20 @@ public class TodoCRUDStepsImpl implements ITodoCRUDSteps {
     private IMainPage mainPage = SelenideMainPage.INSTANCE;
 
     @Override
-    @Step
-    @When("user creates todo item with name: $todoName")
+    @When("user creates todo item (name: $todoItemName)")
     public void userEntersTodoName(String todoName) {
         mainPage.setNewItemName(todoName);
         mainPage.hitEnter();
     }
 
     @Override
-    @Step
+    @When("user marks item as completed (name: $todoItemName)")
     public void userMarksItemAsComplete(String todoItemName) {
         mainPage.selectCheckBoxForItem(todoItemName);
     }
 
     @Override
-    @Step
+    @When("user deletes item (name: $todoItemName)")
     public void userDeletesItem(String todoItemName) {
         mainPage.clickDeleteButtonForItem(todoItemName);
     }

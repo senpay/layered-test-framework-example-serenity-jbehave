@@ -3,6 +3,8 @@ package gmail.alexspush.service;
 import gmail.alexspush.driver.SelenideApplicationDriver;
 import gmail.alexspush.test.IGenericSteps;
 import net.thucydides.core.annotations.Step;
+import org.jbehave.core.annotations.AfterScenario;
+import org.jbehave.core.annotations.BeforeScenario;
 import org.jbehave.core.annotations.Given;
 
 /**
@@ -22,15 +24,14 @@ public class GenericStepsImpl implements IGenericSteps {
      * irrelevant provided same functionality is implemented
      */
     @Override
-    @Step
-    @Given("user opened application")
+    @BeforeScenario
     public void openApplication() {
         //In this class/method the reason why we have three layers is not visible (yet?)
         applicationDriver.openApplication();
     }
 
     @Override
-    @Step
+    @AfterScenario
     public void closeApplication() {
         applicationDriver.closeApplication();
     }

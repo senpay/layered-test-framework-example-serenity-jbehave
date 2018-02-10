@@ -1,13 +1,16 @@
 package gmail.alexspush.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import gmail.alexspush.test.ITodoCRUDSteps;
 import gmail.alexspush.test.ITodoCompositeSteps;
 import net.thucydides.core.annotations.Step;
+import org.jbehave.core.annotations.Given;
 
 import static gmail.alexspush.utils.TestUtils.generateItemName;
+import static gmail.alexspush.utils.TestUtils.getListWithoutSublist;
 import static org.junit.Assume.assumeTrue;
 
 /**
@@ -23,11 +26,21 @@ public class TodoCompositeStepsImpl implements ITodoCompositeSteps {
     //Looks ugly but will leave it as is for now
     private TodoValidationLogic todoValidationLogic = new TodoValidationLogic();
 
+    //bad thing about BDD frameworks with test specified with Gherkin language
+    //in a separate text file is the necessity to store state somewhere
+    //some use tricky context stuff (serenity offered a context, for instance,
+    // but seems to abandon the idea)
+    //I will use idea with getters, seems to be cleaner
+    private List<String> todoItems = Collections.emptyList();
+    private List<String> completedItems = Collections.emptyList();
+
+
+
     @Override
-    @Step
+    @Given("user created todo (name: $todoItemName)")
     public void userCreatedTodoItem(String todoItemName) {
         crudSteps.userEntersTodoName(todoItemName);
-        //Using asume here so exception in step preparation would look
+        //Using assume here so exception in step preparation would look
         //different from typical assertion
         assumeTrue(todoValidationLogic.isItemPresentInAList(todoItemName));
     }
@@ -40,24 +53,36 @@ public class TodoCompositeStepsImpl implements ITodoCompositeSteps {
     }
 
     @Override
-    @Step
-    public List<String> userCreatedNumberOfItems(int numberOfItemsCreated) {
+    @Given("user created several todo items (amount: $numberOfItemsCreated)")
+    public void userCreatedNumberOfItems(int numberOfItemsCreated) {
         final List<String> todoItemNames = new ArrayList<>();
         for (int i = 0; i < numberOfItemsCreated; i++) {
             final String todoItemName = generateItemName();
             userCreatedTodoItem(todoItemName);
             todoItemNames.add(todoItemName);
         }
-        return todoItemNames;
+        this.todoItems = todoItemNames;
     }
 
     @Override
-    @Step
-    public List<String> userCompletedNumberOfItems(List<String> todoItems, int numberOfItemsCompleted) {
-        List<String> todoItemsToBeCompleted = todoItems.subList(0, numberOfItemsCompleted);
+    @Given("user completed some of them (amount: $numberOfItemsCompleted)")
+    public void userCompletedNumberOfItems(int numberOfItemsCompleted) {
+        List<String> todoItemsToBeCompleted = this.todoItems.subList(0, numberOfItemsCompleted);
         for (String todoItem : todoItemsToBeCompleted) {
             userCompletedTodoItem(todoItem);
         }
-        return todoItemsToBeCompleted;
+        this.completedItems = todoItemsToBeCompleted;
+    }
+
+    public List<String> getTodoItems() {
+        return todoItems;
+    }
+
+    public List<String> getCompletedItems() {
+        return completedItems;
+    }
+
+    public List<String> getActiveItems() {
+        return getListWithoutSublist(getTodoItems(), getCompletedItems());
     }
 }
