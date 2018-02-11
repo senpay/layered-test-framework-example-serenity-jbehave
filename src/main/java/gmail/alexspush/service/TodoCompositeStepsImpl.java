@@ -21,20 +21,19 @@ import static org.junit.Assume.assumeTrue;
  */
 public class TodoCompositeStepsImpl implements ITodoCompositeSteps {
 
-    private ITodoCRUDSteps crudSteps = new TodoCRUDStepsImpl();
-    //I use here concrete type as I want some method from it
-    //Looks ugly but will leave it as is for now
-    private TodoValidationLogic todoValidationLogic = new TodoValidationLogic();
-
     //bad thing about BDD frameworks with test specified with Gherkin language
     //in a separate text file is the necessity to store state somewhere
     //some use tricky context stuff (serenity offered a context, for instance,
     // but seems to abandon the idea)
     //I will use idea with getters, seems to be cleaner
-    private List<String> todoItems = Collections.emptyList();
-    private List<String> completedItems = Collections.emptyList();
+    //Threadlocals would be nice as well
+    private static List<String> todoItems = Collections.emptyList();
+    private static List<String> completedItems = Collections.emptyList();
 
-
+    private ITodoCRUDSteps crudSteps = new TodoCRUDStepsImpl();
+    //I use here concrete type as I want some method from it
+    //Looks ugly but will leave it as is for now
+    private TodoValidationLogic todoValidationLogic = new TodoValidationLogic();
 
     @Override
     @Given("user created todo (name: $todoItemName)")

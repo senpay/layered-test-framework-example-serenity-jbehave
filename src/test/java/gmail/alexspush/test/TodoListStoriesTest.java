@@ -7,5 +7,5 @@ import net.serenitybdd.jbehave.SerenityStories;
  * apushkarev@workfusion.com
  * 10.2.18
  */
-public class TodoListStories extends SerenityStories {
+public class TodoListStoriesTest extends SerenityStories {
 }

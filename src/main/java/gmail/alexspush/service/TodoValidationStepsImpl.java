@@ -56,8 +56,19 @@ public class TodoValidationStepsImpl {
     }
 
     @Then("user sees active items")
-    public void userseesActiveItems() {
+    public void userSeesActiveItems() {
         this.userSeesItems(todoCompositeSteps.getActiveItems());
+    }
+
+
+    @Then("user does not see active items")
+    public void userDoesNotSeeActiveItems() {
+        this.userDoesNotSeeItems(todoCompositeSteps.getActiveItems());
+    }
+
+    @Then("user sees completed items")
+    public void userSeesCompletedItems() {
+        this.userSeesItems(todoCompositeSteps.getCompletedItems());
     }
 
     @Step

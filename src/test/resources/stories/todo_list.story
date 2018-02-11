@@ -18,3 +18,24 @@ And user completed some of them (amount: 4)
 When selects active filter
 Then user sees active items
 And user does not see completed items
+
+Scenario: should see only active if completed filter applied
+Given user created several todo items (amount: 7)
+And user completed some of them (amount: 6)
+When selects completed filter
+Then user sees completed items
+And user does not see active items
+
+Scenario: should see only active if completed filter applied
+Given user created several todo items (amount: 3)
+And user completed some of them (amount: 1)
+When selects all filter
+Then user sees completed items
+And user sees active items
+
+Scenario: failing scenario to check reporting
+Given user created several todo items (amount: 3)
+And user completed some of them (amount: 1)
+When selects all filter
+Then user does not see completed items
+And user sees active items
