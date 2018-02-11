@@ -33,5 +33,5 @@ add a separate UI case for that)
 To start:
 You will need Apache Maven installed. From the command line execute: mvn verify
 Html report can be found under {path to the project root}/target/site/serenity/index.html
-
+Some information will be also available at {path to the project root}/target/jbehave/stories.todo_list.html
 
