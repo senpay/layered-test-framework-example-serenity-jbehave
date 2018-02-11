@@ -21,6 +21,7 @@
 #IDE files
 */target/*
 target/*
+build/*
 */build/*
 .idea/*
 *.iml
