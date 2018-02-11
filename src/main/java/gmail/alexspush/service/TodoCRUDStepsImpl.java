@@ -33,7 +33,7 @@ public class TodoCRUDStepsImpl implements ITodoCRUDSteps {
     }
 
     @Override
-    @Step
+    @When("user un-marks item as completed (name: $todoItemName)")
     public void userUnMarksItemAsComplete(String todoItemName) {
         mainPage.unSelectCheckBoxForItem(todoItemName);
     }

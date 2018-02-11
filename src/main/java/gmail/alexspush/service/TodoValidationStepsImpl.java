@@ -37,7 +37,7 @@ public class TodoValidationStepsImpl {
         assertFalse(errorMessage, todoValidationLogic.isItemPresentInAList(todoItemName));
     }
 
-    @Step
+    @Then("todo item is not marked completed (name: $todoItemName)")
     public void todoItemIsNotMarkedCompeted(String todoItemName) {
         final String errorMessage = String.format("Item with name %s is marked completed", todoItemName);
         assertFalse(errorMessage, todoValidationLogic.isTodoItemMarkedCompeted(todoItemName));

@@ -36,7 +36,7 @@ public class TodoCompositeStepsImpl implements ITodoCompositeSteps {
     private TodoValidationLogic todoValidationLogic = new TodoValidationLogic();
 
     @Override
-    @Given("user created todo (name: $todoItemName)")
+    @Given("user created todo item (name: $todoItemName)")
     public void userCreatedTodoItem(String todoItemName) {
         crudSteps.userEntersTodoName(todoItemName);
         //Using assume here so exception in step preparation would look
@@ -45,7 +45,7 @@ public class TodoCompositeStepsImpl implements ITodoCompositeSteps {
     }
 
     @Override
-    @Step
+    @Given("user completed todo item (name: $todoItemName)")
     public void userCompletedTodoItem(String todoItemName) {
         crudSteps.userMarksItemAsComplete(todoItemName);
         assumeTrue(todoValidationLogic.isTodoItemMarkedCompeted(todoItemName));
