@@ -36,18 +36,18 @@ public class SelenideMainPage implements IMainPage {
     private SelenideMainPage() {
     }
 
-    @Override
+
     public void setNewItemName(String todoName) {
         $(NEW_FIELD_XPATH).setValue(todoName);
 
     }
 
-    @Override
+
     public void hitEnter() {
         $(NEW_FIELD_XPATH).pressEnter();
     }
 
-    @Override
+
     public List<String> getTodoItemNames() {
         final ElementsCollection todoItems = $$(TODO_ITEMS_XPATH);
         final List<String> todoItemNames = todoItems
@@ -57,13 +57,13 @@ public class SelenideMainPage implements IMainPage {
         return todoItemNames;
     }
 
-    @Override
+
     public void selectCheckBoxForItem(final String todoItemName) {
         //Chaining like this is not nice, but does not matter now
         //Just remember that this is a code smell very NPE prone
         findCheckBoxForItem(todoItemName).setSelected(true);
     }
-    @Override
+
     public void unSelectCheckBoxForItem(final String todoItemName) {
         //Chaining like this is not nice, but does not matter now
         //Just remember that this is a code smell very NPE prone
@@ -71,7 +71,7 @@ public class SelenideMainPage implements IMainPage {
     }
 
 
-    @Override
+
     public boolean isCheckBoxItemSelected(final String todoItemName) {
         //Chaining like this is not nice, but does not matter now
         //Just remember that this is a code smell very NPE prone
@@ -88,7 +88,7 @@ public class SelenideMainPage implements IMainPage {
      * For instance if this hover logic gets deleted it would be nice to avoid step changes
      * @param todoItemName
      */
-    @Override
+
     public void clickDeleteButtonForItem(final String todoItemName) {
         hoverOverTodoItem(todoItemName);
         clickDeleteButton(todoItemName);
@@ -100,17 +100,17 @@ public class SelenideMainPage implements IMainPage {
         return $(checkBoxXpath);
     }
 
-    @Override
+
     public void clickCompletedLink() {
         $(COMPLETED_FILTER_LINK_XPATH).click();
     }
 
-    @Override
+
     public void clickAllLink() {
         $(ALL_FILTER_LINK_XPATH).click();
     }
 
-    @Override
+
     public void clickActiveLink() {
         $(ACTIVE_FILTER_LINK_XPATH).click();
     }

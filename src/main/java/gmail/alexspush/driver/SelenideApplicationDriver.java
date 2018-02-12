@@ -15,7 +15,7 @@ public class SelenideApplicationDriver implements IApplicationDriver {
     //This url would be better to put into properties file
     private static final String APPLICATION_URL = "http://todomvc.com/examples/angularjs/#/";
 
-    @Override
+
     public void openApplication() {
         //This configuration may as well be outside of the method, but does not matter now
         Configuration.browser = "chrome";
@@ -23,7 +23,7 @@ public class SelenideApplicationDriver implements IApplicationDriver {
         open(APPLICATION_URL);
     }
 
-    @Override
+
     public void closeApplication() {
         close();
     }

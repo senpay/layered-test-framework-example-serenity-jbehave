@@ -1,16 +1,13 @@
 package gmail.alexspush.service;
 
 import gmail.alexspush.driver.SelenideApplicationDriver;
-import gmail.alexspush.test.IGenericSteps;
-import net.thucydides.core.annotations.Step;
 import org.jbehave.core.annotations.AfterScenario;
 import org.jbehave.core.annotations.BeforeScenario;
-import org.jbehave.core.annotations.Given;
 
 /**
  * Created by Alexander Pushkarev on 7.2.18.
  */
-public class GenericStepsImpl implements IGenericSteps {
+public class GenericStepsImpl {
 
     //Some application driver to be here
     //At this stage it is not important which f*ckium it is.
@@ -23,14 +20,14 @@ public class GenericStepsImpl implements IGenericSteps {
      * Is it url or tiny client written in Java-Script is (or should be)
      * irrelevant provided same functionality is implemented
      */
-    @Override
+
     @BeforeScenario
     public void openApplication() {
         //In this class/method the reason why we have three layers is not visible (yet?)
         applicationDriver.openApplication();
     }
 
-    @Override
+
     @AfterScenario
     public void closeApplication() {
         applicationDriver.closeApplication();

@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import gmail.alexspush.test.ITodoCRUDSteps;
-import gmail.alexspush.test.ITodoCompositeSteps;
-import net.thucydides.core.annotations.Step;
 import org.jbehave.core.annotations.Given;
 
 import static gmail.alexspush.utils.TestUtils.generateItemName;
@@ -19,7 +16,7 @@ import static org.junit.Assume.assumeTrue;
  * but should fail with different exception if necessary
  * Created by Alexander Pushkarev on 9.2.18.
  */
-public class TodoCompositeStepsImpl implements ITodoCompositeSteps {
+public class TodoCompositeStepsImpl {
 
     //bad thing about BDD frameworks with test specified with Gherkin language
     //in a separate text file is the necessity to store state somewhere
@@ -30,12 +27,12 @@ public class TodoCompositeStepsImpl implements ITodoCompositeSteps {
     private static List<String> todoItems = Collections.emptyList();
     private static List<String> completedItems = Collections.emptyList();
 
-    private ITodoCRUDSteps crudSteps = new TodoCRUDStepsImpl();
+    private TodoCRUDStepsImpl crudSteps = new TodoCRUDStepsImpl();
     //I use here concrete type as I want some method from it
     //Looks ugly but will leave it as is for now
     private TodoValidationLogic todoValidationLogic = new TodoValidationLogic();
 
-    @Override
+
     @Given("user created todo item (name: $todoItemName)")
     public void userCreatedTodoItem(String todoItemName) {
         crudSteps.userEntersTodoName(todoItemName);
@@ -44,14 +41,14 @@ public class TodoCompositeStepsImpl implements ITodoCompositeSteps {
         assumeTrue(todoValidationLogic.isItemPresentInAList(todoItemName));
     }
 
-    @Override
+
     @Given("user completed todo item (name: $todoItemName)")
     public void userCompletedTodoItem(String todoItemName) {
         crudSteps.userMarksItemAsComplete(todoItemName);
         assumeTrue(todoValidationLogic.isTodoItemMarkedCompeted(todoItemName));
     }
 
-    @Override
+
     @Given("user created several todo items (amount: $numberOfItemsCreated)")
     public void userCreatedNumberOfItems(int numberOfItemsCreated) {
         final List<String> todoItemNames = new ArrayList<>();
@@ -63,7 +60,7 @@ public class TodoCompositeStepsImpl implements ITodoCompositeSteps {
         this.todoItems = todoItemNames;
     }
 
-    @Override
+
     @Given("user completed some of them (amount: $numberOfItemsCompleted)")
     public void userCompletedNumberOfItems(int numberOfItemsCompleted) {
         List<String> todoItemsToBeCompleted = this.todoItems.subList(0, numberOfItemsCompleted);
